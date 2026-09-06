@@ -9,13 +9,13 @@ int main(void){
     int ret = dfs_init(DFS_DEFAULT_LOCATION);
     assert(ret == DFS_ESUCCESS);
 
-    char sbuf[1024];
+    char c;
     int fp = dfs_open("/stuff.txt");
 
     while (1){
         while (!dfs_eof(fp)){
-            dfs_read(sbuf, 1, -1, fp);
-            printf("%i\t%s\n", dfs_tell(fp), sbuf);
+            dfs_read(&c, 1, 1, fp);
+            printf("%d\t%c\n", dfs_tell(fp), c);
         }
         break;
     }
