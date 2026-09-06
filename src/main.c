@@ -5,20 +5,12 @@
 
 int main(void){
 
-    console_init();
-    int ret = dfs_init(DFS_DEFAULT_LOCATION);
-    assert(ret == DFS_ESUCCESS);
-
-    char c;
-    int fp = dfs_open("/stuff.txt");
+    display_init(RESOLUTION_640x480, DEPTH_16_BPP, 2, GAMMA_NONE, FILTERS_RESAMPLE);
+    static surface_t *frame;
 
     while (1){
-        while (!dfs_eof(fp)){
-            dfs_read(&c, 1, 1, fp);
-            printf("%d\t%c\n", dfs_tell(fp), c);
-        }
-        break;
+        while(!(frame = display_lock()));
+        graphics_draw_box(frame, 20, 20, 600, 400, graphics_make_color(230, 250, 240, 255));
+        display_show(frame);
     }
-
-    dfs_close(fp);
 }
